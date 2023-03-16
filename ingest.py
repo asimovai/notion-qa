@@ -5,6 +5,7 @@ import faiss
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 import pickle
+import time
 
 
 # Here we load in the data in the format that Notion exports it in.
@@ -29,7 +30,17 @@ for i, d in enumerate(data):
 
 
 # Here we create a vector store from the documents and save it to disk.
-store = FAISS.from_texts(docs, OpenAIEmbeddings(), metadatas=metadatas)
+def try_openai():
+    try:
+        store = FAISS.from_texts(docs, OpenAIEmbeddings(), metadatas=metadatas)
+    except Exception as e:
+        print(e)
+        print("Retrying in 10 seconds...")
+        time.sleep(10)
+        try_openai()
+
+try_openai()
+
 faiss.write_index(store.index, "docs.index")
 store.index = None
 with open("faiss_store.pkl", "wb") as f:
