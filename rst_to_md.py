@@ -23,7 +23,7 @@ def get_total_md_size(src_directory):
 
 if __name__ == "__main__":
     # Replace 'your_directory_path' with the path to the directory where you want to start searching for .rst files
-    src_directory = 'Notion_DB'
+    src_directory = 'Repo_DB'
     copy_rst_files_to_md(src_directory)
     total_md_size = get_total_md_size(src_directory)
     print(f'Total size of .md files in {src_directory}: {total_md_size:.2f} KB')

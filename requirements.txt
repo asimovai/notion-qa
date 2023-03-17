@@ -1,5 +1,7 @@
-langchain==0.0.58
+langchain==0.0.113
 openai
 faiss-cpu
 streamlit
 streamlit-chat
+unstructured==0.5.4
+chromadb==0.3.11
